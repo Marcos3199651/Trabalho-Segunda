@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --bg-color: #0f172a;
+    --panel-bg: #1e293b;
+    --table-color: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --color-think: #3b82f6;
+    --color-hungry: #ef4444;
+    --color-eat: #10b981;
+    --fork-free: #cbd5e1;
+    --fork-used: #475569;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header { text-align: center; margin-bottom: 20px; }
+h1 { font-size: 2rem; margin: 0 0 5px 0; font-weight: 700; }
+p { color: var(--text-muted); margin: 0; font-size: 1rem; }
+
+.controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 30px;
+    background: var(--panel-bg);
+    padding: 15px 30px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+button {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-start { background-color: var(--color-eat); color: #000; }
+.btn-start:hover:not(:disabled) { background-color: #059669; color: white; }
+.btn-pause { background-color: #f59e0b; color: #000; }
+.btn-restart { background-color: #3b82f6; }
+button:disabled { background-color: #475569 !important; color: #94a3b8 !important; cursor: not-allowed; }
+
+.timer {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'Consolas', monospace;
+    color: var(--text-main);
+    background: #020617;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    margin-left: 10px;
+}
+
+.dashboard {
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    width: 100%;
+}
+
+.mesa-wrapper {
+    background-color: var(--panel-bg);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 350px;
+    max-width: 480px;
+}
+
+.mesa-container { position: relative; width: 350px; height: 350px; }
+
+.mesa {
+    width: 180px;
+    height: 180px;
+    background-color: var(--table-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.5), 0 10px 20px rgba(0,0,0,0.2);
+    border: 4px solid #475569;
+}
+
+.filosofo {
+    width: 76px;
+    height: 76px;
+    background-color: var(--panel-bg);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -38px;
+    margin-left: -38px;
+    transform: rotate(var(--angle)) translateY(-140px) rotate(calc(var(--angle) * -1)) scale(var(--scale, 1));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s, border-color 0.4s;
+    text-align: center;
+    font-size: 12px;
+    border: 4px solid var(--text-muted);
+    z-index: 10;
+}
+
+.filosofo span { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+
+#f0 { --angle: 0deg; }
+#f1 { --angle: 72deg; }
+#f2 { --angle: 144deg; }
+#f3 { --angle: 216deg; }
+#f4 { --angle: 288deg; }
+
+/* --- CORREÇÃO DOS GARFOS --- */
+.talher {
+    width: 6px;
+    height: 35px; /* Deixei levemente menor */
+    background-color: var(--fork-free);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -17.5px;
+    margin-left: -3px;
+
+    /* translateY(-65px) coloca o garfo perfeitamente dentro da mesa (que tem raio 90px) */
+    transform: rotate(var(--angle)) translateY(-65px);
+
+    border-radius: 8px;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 5;
+}
+
+#t0 { --angle: 36deg; }
+#t1 { --angle: 108deg; }
+#t2 { --angle: 180deg; }
+#t3 { --angle: 252deg; }
+#t4 { --angle: 324deg; }
+
+.estado-pensando { border-color: var(--color-think); color: var(--color-think); --scale: 1; }
+.estado-fome { border-color: var(--color-hungry); color: var(--color-hungry); animation: pulse 1.5s infinite; --scale: 1; }
+.estado-comendo { background-color: var(--color-eat); border-color: var(--color-eat); color: #000; --scale: 1.15; box-shadow: 0 0 25px rgba(16, 185, 129, 0.4); }
+.estado-parado { border-color: var(--text-muted); color: var(--text-muted); --scale: 1; }
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.panel {
+    background-color: #020617;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 16px;
+    border: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+}
+
+.panel-header { background-color: #1e293b; padding: 15px 20px; font-size: 13px; font-weight: 700; color: var(--text-main); border-bottom: 1px solid #334155; text-transform: uppercase; }
+.table-container { padding: 20px; overflow-y: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { color: var(--text-muted); font-weight: 600; padding-bottom: 15px; border-bottom: 1px solid #334155; font-size: 13px; text-transform: uppercase; }
+td { padding: 12px 0; border-bottom: 1px solid #1e293b; font-size: 15px; font-weight: 600; }
+tr:last-child td { border-bottom: none; padding-bottom: 0; }
+.valor-contagem { font-family: 'Consolas', monospace; font-size: 18px; color: var(--color-eat); font-weight: 700; text-align: right; }
+
+.log-container {
+    padding: 15px;
+    overflow-y: auto;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 13px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 400px;
+}
+.log-time { color: #64748b; margin-right: 5px; font-size: 11px;}

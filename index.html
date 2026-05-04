@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jantar dos Filósofos - Concorrência Prática</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>O Jantar dos Filósofos</h1>
+        <p>Simulação: Concorrência de até 2 Filósofos (30s Total)</p>
+    </div>
+
+    <div class="controls">
+        <button id="btnStart" class="btn-start" onclick="iniciarSimulacao()">▶ Iniciar</button>
+        <button id="btnPause" class="btn-pause" onclick="alternarPausa()" disabled>⏸ Pausar</button>
+        <button id="btnRestart" class="btn-restart" onclick="reiniciarSimulacao()" disabled>↻ Reiniciar</button>
+        <div class="timer" id="timerDisplay">00:30</div>
+    </div>
+
+    <div class="dashboard">
+        <div class="mesa-wrapper">
+            <div class="mesa-container">
+                <div class="mesa"></div>
+                <div id="f0" class="filosofo estado-parado"><span>F1</span>Parado</div>
+                <div id="f1" class="filosofo estado-parado"><span>F2</span>Parado</div>
+                <div id="f2" class="filosofo estado-parado"><span>F3</span>Parado</div>
+                <div id="f3" class="filosofo estado-parado"><span>F4</span>Parado</div>
+                <div id="f4" class="filosofo estado-parado"><span>F5</span>Parado</div>
+                
+                <div id="t0" class="talher"></div>
+                <div id="t1" class="talher"></div>
+                <div id="t2" class="talher"></div>
+                <div id="t3" class="talher"></div>
+                <div id="t4" class="talher"></div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">Placar de Refeições</div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Filósofo</th><th style="text-align: right;">Total</th></tr></thead>
+                    <tbody>
+                        <tr><td>F1</td><td class="valor-contagem" id="count-0">0</td></tr>
+                        <tr><td>F2</td><td class="valor-contagem" id="count-1">0</td></tr>
+                        <tr><td>F3</td><td class="valor-contagem" id="count-2">0</td></tr>
+                        <tr><td>F4</td><td class="valor-contagem" id="count-3">0</td></tr>
+                        <tr><td>F5</td><td class="valor-contagem" id="count-4">0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">Log de Feedback</div>
+            <div class="log-container" id="log-content">
+                <div style="color: var(--text-muted);">Aguardando início da simulação...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
